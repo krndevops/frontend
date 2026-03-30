@@ -7,14 +7,14 @@ pipeline {
     stages {
         stage('Docker Build') {
             steps {
-                sh 'docker build -t krn010/frontend .'
+                sh 'docker build -t docker.io/krn010/frontend .'
             }
 
         }
 
         stage('Docker Push') {
             steps {
-                sh 'docker push krn010/frontend'
+                sh 'docker push docker.io/krn010/frontend'
             }
 
         }
