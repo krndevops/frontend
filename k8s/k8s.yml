@@ -1,3 +1,31 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: docker.io/krn010/frontend
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "250Mi"
+              cpu: "500m"
+            limits:
+              memory: "500Mi"
+              cpu: "750m"
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -22,37 +50,10 @@ spec:
     - host: frontend-dev.kdevops.online
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - pathType: Prefix
             backend:
               service:
                 name: frontend
                 port:
                   number: 80
----
-metadata:
-  name: frontend
-  labels:
-    app: frontend
-spec:
-  # modify replicas according to your case
-  replicas: 1
-  selector:
-    matchLabels:
-      app: frontend
-  template:
-    metadata:
-      labels:
-        app: frontend
-    spec:
-      containers:
-        - name: frontend
-          image: docker.io/krn010/frontend
-          imagePullPolicy: Always
-          resources:
-            requests:
-              memory: "250Mi"
-              cpu: "500m"
-            limits:
-              memory: "500Mi"
-              cpu: "750m"
+            path: /
