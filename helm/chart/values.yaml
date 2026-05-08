@@ -1,7 +1,7 @@
 component: frontend
 service:
   port: 80
-  containerPort: 8080
+  containerPort: 80
 
 initContainers:
   parameters_pull:
@@ -12,7 +12,3 @@ containers:
   main:
     image: docker.io/krn010/frontend
     imagePullPolicy: Always
-
-volumeMounts:
-  - name: parameters
-    mountPath: /parameters
